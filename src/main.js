@@ -11,7 +11,7 @@ function attachHandlers(instrument, element) {
   let mouseDown = false;
   element.addEventListener('mousedown', (event) => {
     const rect = element.getBoundingClientRect();
-    const y = (event.y - rect.top) / element.clientHeight;
+    const y = 1.0 - (event.y - rect.top) / element.clientHeight;
     const x = (event.x - rect.left) / element.clientWidth;
     instrument.play(y, x);
 
@@ -26,7 +26,7 @@ function attachHandlers(instrument, element) {
   element.addEventListener('mousemove', (event) => {
     if (mouseDown) {
       const rect = element.getBoundingClientRect();
-      const y = (event.y - rect.top) / element.clientHeight;
+      const y = 1.0 - (event.y - rect.top) / element.clientHeight;
       const x = (event.x - rect.left) / element.clientWidth;
       instrument.play(y, x);
     }
