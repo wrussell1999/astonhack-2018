@@ -1,5 +1,5 @@
 window.onload = function() {
-  var instrument = new Instrument('square');
+  var instrument = new Instrument();
 
   let mouseDown = false;
   document.addEventListener('mousedown', (event) => {
@@ -17,19 +17,28 @@ window.onload = function() {
 }
 
 class Instrument {
-  constructor(waveType) {
+  constructor() {
     this.ctx = new (window.AudioContext || window.webkitAudioContext)();
-
-    this.oscillator = this.ctx.createOscillator();
-    this.oscillator.type = waveType;
 
     this.volume = this.ctx.createGain();
     this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
-
-    this.oscillator.connect(this.volume);
     this.volume.connect(this.ctx.destination);
 
-    this.oscillator.start();
+    this.oscillators = [];
+    
+    let oscillator = this.ctx.createOscillator();
+    oscillator.type = 'sine';
+    this.oscillators.push(oscillator);
+
+    let oscillator2 = this.ctx.createOscillator();
+    oscillator2.type = 'sawtooth';
+    oscillator2.detune.setValueAtTime(0, 10);
+    this.oscillators.push(oscillator2);
+
+    for (let osc of this.oscillators) {
+      osc.start();
+      osc.connect(this.volume);
+    }
 
     this.playing = null;
   }
@@ -37,8 +46,13 @@ class Instrument {
   play(freq) {
     // this smooths out the sounds
     const delay = 0.05;
-    this.oscillator.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
-    this.volume.gain.setValueAtTime(0.2, this.ctx.currentTime + delay);
+
+    for (let osc of this.oscillators) {
+      osc.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
+      osc.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
+
+      this.volume.gain.setValueAtTime(0.2, this.ctx.currentTime + delay);
+    }
 
     if (this.playing) {
       clearTimeout(this.playing);
