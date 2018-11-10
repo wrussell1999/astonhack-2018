@@ -11,7 +11,8 @@ window.onload = function() {
   let canvas = document.getElementById('slider');
   let ctx = canvas.getContext('2d');
 
-  ctx.fillStyle = 'lightblue';
+  ctx.fillStyle = 'black';
+  ctx.strokeStyle = 'white';
 
   let length = 0;
   let dlength = 4;
