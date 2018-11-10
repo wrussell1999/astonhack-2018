@@ -171,7 +171,7 @@ func (jc *joyconBluetooth) ReadInto(out *jcpc.CombinedState, includeGyro bool) {
 	if jc.side.IsRight() {
 		out.AdjSticks[1] = jc.calib[1].Adjust(jc.raw_stick[1])
 		out.AdjSticks[1][0] = jc.gyro[0][0] / 2						// pitch axis
-		out.AdjSticks[1][1] = jc.gyro[0][1] / 2						// roll axis (inverted)
+		out.AdjSticks[1][1] = -(jc.gyro[0][1]) / 2						// roll axis
 	}
 
 	if includeGyro && jc.haveGyro {
@@ -348,7 +348,8 @@ func (jc *joyconBluetooth) OnFrame() {
 		return
 	}
 
-	jc.sendRumble(jc.mode.NeedsEmptyRumbles())
+	jc.sendRumble(true)
+	// jc.Battery()
 }
 
 // mu must be held
@@ -416,8 +417,11 @@ func (jc *joyconBluetooth) sendRumble(forceUpdate bool) {
 }
 
 func (jc *joyconBluetooth) onReadError(err error) {
+	fmt.Printf("[ ERR] JoyCon %s read error: %v\n", jc.serial, err)
+
 	jc.mu.Lock()
 	if jc.isShutdown {
+		fmt.Printf("joycon shutdown\n")
 		jc.mu.Unlock()
 		return // OK
 	}
@@ -426,9 +430,9 @@ func (jc *joyconBluetooth) onReadError(err error) {
 		jc.hidHandle.Close()
 	}
 	jc.hidHandle = nil
-	jc.mu.Unlock()
 
-	fmt.Printf("[ ERR] JoyCon %s read error: %v\n", jc.serial, err)
+
+	jc.mu.Unlock()
 
 	go notify(jc, jcpc.NotifyConnection, jc.ui, jc.controller)
 }

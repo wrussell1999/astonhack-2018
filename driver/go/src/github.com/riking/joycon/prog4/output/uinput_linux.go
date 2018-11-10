@@ -351,7 +351,7 @@ func (o *uinput) StickUpdate(axis jcpc.AxisID, value int16) {
 
 	val := int32(value)
 	if invert {
-		val = -val
+		val = val 		//don't invert
 	}
 	o.pending = append(o.pending, uinputEvent{
 		Type:  C.EV_ABS,
