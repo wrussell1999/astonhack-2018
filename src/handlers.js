@@ -36,15 +36,20 @@ function attachJoyconHandlers(instrument) {
     // if (gp.id.endsWith('-MotionLeft') || gp.id.endsWith('-MotionRight')) {
     if (gp.id.endsWith('-MotionLeft')) {
       interval = setInterval(() => {
+        let pressed = false;
         for (let i = 0; i < gp.buttons.length; i++) {
           if (gp.buttons[i].pressed) {
-            let y = (gp.axes[gp.axes.length - 1] + 1) / 2;
-            let x = (gp.axes[gp.axes.length - 2] + 1) / 2;
-            instrument.play(y, x);
-
+            pressed = true;
             break;
           }
         }
+        if (pressed) {
+          let y = (gp.axes[gp.axes.length - 1] + 1) / 2;
+          let x = (gp.axes[gp.axes.length - 2] + 1) / 2;
+          instrument.play(y, x);
+      } else {
+          instrument.pause();
+      }
       })
     }
   })
