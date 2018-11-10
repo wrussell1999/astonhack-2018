@@ -2,7 +2,7 @@ const {Instrument} = require('./instrument');
 
 window.onload = function() {
   var instrument = new Instrument();
-  attachHandlers(instrument, document);
+  attachHandlers(instrument, document.getElementById('slider'));
 }
 
 function attachHandlers(instrument, element) {
@@ -10,7 +10,7 @@ function attachHandlers(instrument, element) {
 
   let mouseDown = false;
   element.addEventListener('mousedown', (event) => {
-    instrument.play(event.clientY);
+    instrument.play(event.y, event.x / element.clientWidth);
 
     mouseDown = true;
     clearTimeout(pauseTimeout);
@@ -22,7 +22,7 @@ function attachHandlers(instrument, element) {
 
   element.addEventListener('mousemove', (event) => {
     if (mouseDown) {
-      instrument.play(event.y, event.x / document.body.clientWidth);
+      instrument.play(event.y, event.x / element.clientWidth);
     }
   })
 }
