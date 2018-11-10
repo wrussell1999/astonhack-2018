@@ -32,7 +32,6 @@ GOBIN ?= $(GOPATH)/bin
 
 jcdriver: prog4
 	go install -v ./prog4/jcdriver
-	cp $(GOBIN)/jcdriver .
 
 jcmapper: $(OBJS)
 	gcc -o $@ $^ $(LDFLAGS)
