@@ -18,5 +18,4 @@ state_button.onclick =  function (event) {
     button.innerHTML = "JoyCons";
     console.log(button_state);
   }
-
 }
