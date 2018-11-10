@@ -22,6 +22,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html'
     }),
-    new FaviconsWebpackPlugin('logo.png')
+    new FaviconsWebpackPlugin('./my-logo.png')
   ]
 };
