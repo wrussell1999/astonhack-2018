@@ -19,9 +19,10 @@ module.exports = {
     ]
   },
   plugins: [
+    new FaviconsWebpackPlugin('./logo.png'),
     new HtmlWebpackPlugin({
       template: 'index.html'
-    }),
-    new FaviconsWebpackPlugin('./my-logo.png')
+    })
+    
   ]
 };
