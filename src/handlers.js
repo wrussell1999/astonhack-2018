@@ -2,8 +2,6 @@ let mouseEnabled = false;
 let joyconsEnabled = true;
 
 function attachMouseHandlers(instrument, element) {
-  let pauseTimeout = null;
-
   let mouseDown = false;
   element.addEventListener('mousedown', (event) => {
     if (mouseEnabled) {
@@ -14,11 +12,10 @@ function attachMouseHandlers(instrument, element) {
 
       mouseDown = true;
     }
-    clearTimeout(pauseTimeout);
   })
   document.addEventListener('mouseup', (event) => {
     mouseDown = false;
-    pauseTimeout = setTimeout(() => instrument.pause(), 100)
+    instrument.pause();
   })
 
   element.addEventListener('mousemove', (event) => {
@@ -32,6 +29,29 @@ function attachMouseHandlers(instrument, element) {
 }
 
 function attachJoyconHandlers(instrument) {
+  let interval = null;
+
+  window.addEventListener('gamepadconnected', (event) => {
+    let gp = event.gamepad;
+    // if (gp.id.endsWith('-MotionLeft') || gp.id.endsWith('-MotionRight')) {
+    if (gp.id.endsWith('-MotionLeft')) {
+      interval = setInterval(() => {
+        for (let i = 0; i < gp.buttons.length; i++) {
+          if (gp.buttons[i].pressed) {
+            let y = (gp.axes[gp.axes.length - 1] + 1) / 2;
+            let x = (gp.axes[gp.axes.length - 2] + 1) / 2;
+            instrument.play(y, x);
+
+            break;
+          }
+        }
+      })
+    }
+  })
+
+  window.addEventListener('gamepaddisconnected', (event) => {
+    clearInterval(interval);
+  })
 }
 
 function toggleInputs() {
