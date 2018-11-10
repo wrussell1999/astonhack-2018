@@ -8,6 +8,20 @@ window.onload = function() {
   let instrument = new Instrument(audio, majorPentatonicScale);
   attachHandlers(instrument, document.getElementById('slider'));
 
+  let button_state = false;
+  let state_button = document.getElementById('state_button');
+  state_button.onclick = function (event) {
+    button_state = !(button_state);
+    let button = document.getElementById('state_label');
+    if (button_state == true) {
+      button.innerHTML = 'Mouse';
+      console.log(button_state);
+    } else if (button_state == false) {
+      button.innerHTML = 'JoyCons';
+      console.log(button_state);
+    }
+  }
+
   let canvas = document.getElementById('slider');
   let ctx = canvas.getContext('2d');
 
@@ -58,17 +72,4 @@ function continuous(pitch) {
   const max = 49 + 12;
   const between = min + pitch * (max - min);
   return notes.noteToFrequency(between);
-}
-
-var button_state = false;
-state_button.onclick =  function (event) {
-  button_state = !(button_state);
-  var button = document.getElementById("state_label");
-  if (button_state == true) {
-    button.innerHTML = "Mouse";
-    console.log(button_state);
-  } else if (button_state == false) {
-    button.innerHTML = "JoyCons";
-    console.log(button_state);
-  }
 }
