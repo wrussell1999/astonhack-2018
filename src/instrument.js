@@ -10,7 +10,7 @@ class Instrument {
     this.leftGain.gain.setValueAtTime(0.5, this.ctx.currentTime);
     this.leftGain.connect(this.volume);
     this.left = this.ctx.createOscillator();
-    this.left.type = 'sine';
+    this.left.type = 'square';
     this.left.connect(this.leftGain);
     this.left.start()
 
@@ -30,10 +30,10 @@ class Instrument {
     this.left.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
     this.right.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
 
-    this.leftGain.gain.linearRampToValueAtTime(pan, this.ctx.currentTime + delay);
-    this.rightGain.gain.linearRampToValueAtTime(1.0 - pan, this.ctx.currentTime + delay);
+    this.leftGain.gain.linearRampToValueAtTime(1.0 - pan, this.ctx.currentTime + delay);
+    this.rightGain.gain.linearRampToValueAtTime(pan, this.ctx.currentTime + delay);
 
-    this.volume.gain.setValueAtTime(0.2, this.ctx.currentTime + delay);
+    this.volume.gain.setValueAtTime(0.4, this.ctx.currentTime + delay);
   }
 
   pause() {
