@@ -1,13 +1,18 @@
 window.onload = function() {
   var instrument = new Instrument('square');
 
+  let mouseDown = false;
   document.addEventListener('mousedown', (event) => {
-    let x = event.clientX;
-    let y = event.clientY;
+    mouseDown = true;
+  })
+  document.addEventListener('mouseup', (event) => {
+    mouseDown = false;
+  })
 
-    instrument.play(y);
-
-    console.log(x, y);
+  document.addEventListener('mousemove', (event) => {
+    if (mouseDown) {
+      instrument.play(event.clientY);
+    }
   })
 }
 
