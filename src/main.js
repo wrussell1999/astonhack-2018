@@ -1,12 +1,18 @@
 window.onload = function() {
   var instrument = new Instrument();
 
+  let pauseTimeout = null;
+
   let mouseDown = false;
   document.addEventListener('mousedown', (event) => {
+    instrument.play(event.clientY);
+
     mouseDown = true;
+    clearTimeout(pauseTimeout);
   })
   document.addEventListener('mouseup', (event) => {
     mouseDown = false;
+    pauseTimeout = setTimeout(() => instrument.pause(), 100)
   })
 
   document.addEventListener('mousemove', (event) => {
@@ -39,8 +45,6 @@ class Instrument {
       osc.start();
       osc.connect(this.volume);
     }
-
-    this.playing = null;
   }
 
   play(freq) {
@@ -53,14 +57,9 @@ class Instrument {
 
       this.volume.gain.setValueAtTime(0.2, this.ctx.currentTime + delay);
     }
+  }
 
-    if (this.playing) {
-      clearTimeout(this.playing);
-    }
-
-    this.playing = setTimeout(() => {
-      this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
-      this.playing = null;
-    }, 100);
+  pause() {
+    this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
   }
 }
