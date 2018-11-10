@@ -21,7 +21,7 @@ function attachHandlers(instrument, element) {
 
   element.addEventListener('mousemove', (event) => {
     if (mouseDown) {
-      instrument.play(event.y);
+      instrument.play(event.y, event.x / document.body.clientWidth);
     }
   })
 }
@@ -34,33 +34,34 @@ class Instrument {
     this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
     this.volume.connect(this.ctx.destination);
 
-    this.oscillators = [];
-    
-    let oscillator = this.ctx.createOscillator();
-    oscillator.type = 'sine';
-    this.oscillators.push(oscillator);
+    this.leftGain = this.ctx.createGain();
+    this.leftGain.gain.setValueAtTime(0.5, this.ctx.currentTime);
+    this.leftGain.connect(this.volume);
+    this.left = this.ctx.createOscillator();
+    this.left.type = 'sine';
+    this.left.connect(this.leftGain);
+    this.left.start()
 
-    let oscillator2 = this.ctx.createOscillator();
-    oscillator2.type = 'sawtooth';
-    oscillator2.detune.setValueAtTime(0, 10);
-    this.oscillators.push(oscillator2);
-
-    for (let osc of this.oscillators) {
-      osc.start();
-      osc.connect(this.volume);
-    }
+    this.rightGain = this.ctx.createGain();
+    this.rightGain.gain.setValueAtTime(0.5, this.ctx.currentTime);
+    this.rightGain.connect(this.volume);
+    this.right = this.ctx.createOscillator();
+    this.right.type = 'sawtooth';
+    this.right.connect(this.rightGain);
+    this.right.start()
   }
 
-  play(freq) {
+  play(freq, pan = 0.5) {
     // this smooths out the sounds
     const delay = 0.05;
 
-    for (let osc of this.oscillators) {
-      osc.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
-      osc.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
+    this.left.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
+    this.right.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
 
-      this.volume.gain.setValueAtTime(0.2, this.ctx.currentTime + delay);
-    }
+    this.leftGain.gain.linearRampToValueAtTime(pan, this.ctx.currentTime + delay);
+    this.rightGain.gain.linearRampToValueAtTime(1.0 - pan, this.ctx.currentTime + delay);
+
+    this.volume.gain.setValueAtTime(0.2, this.ctx.currentTime + delay);
   }
 
   pause() {
