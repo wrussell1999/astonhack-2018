@@ -5,7 +5,7 @@ import (
 	"os"
 	"runtime"
 	"time"
-	"github.com/riking/joycon/prog4/bluez"
+
 	"github.com/riking/joycon/prog4/consoleiface"
 	"github.com/riking/joycon/prog4/jcpc"
 )
@@ -30,7 +30,7 @@ func main() {
 	runtime.GOMAXPROCS(8 + runtime.NumCPU())
 
 	of := getOutputFactory()
-	bt, err := bluez.New()
+	bt, err := getBluetoothManager()
 	if err != nil {
 		fmt.Println("[FATAL] Could not start up bluetooth manager:", err)
 		fmt.Println("You may need different compile options depending on your distribution")

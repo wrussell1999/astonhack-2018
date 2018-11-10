@@ -290,7 +290,7 @@ func (jc *joyconBluetooth) Shutdown() {
 }
 
 func (jc *joyconBluetooth) Reconnect(hidDeviceInfo interface{}) {
-	fmt.Printf("reconnect device")
+	fmt.Printf("reconnect device function called\n")
 	dev := hidDeviceInfo.(*hid.DeviceInfo)
 	jc.mu.Lock()
 	defer jc.mu.Unlock()
