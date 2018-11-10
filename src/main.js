@@ -47,6 +47,6 @@ class Instrument {
     this.playing = setTimeout(() => {
       this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
       this.playing = null;
-    }, 2000);
+    }, 100);
   }
 }
