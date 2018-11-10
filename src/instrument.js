@@ -42,11 +42,21 @@ class Instrument {
     this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
   }
 
+  /*
   realToFrequency(real) {
     const min = 49;
     const max = 49 + 12;
     const between = min + real * (max - min);
     return this.noteToFrequency(between);
+  }
+  */
+
+  realToFrequency(real) {
+    const base = 49;
+    const majorScale = [base, base + 2, base + 4, base + 7, base + 9];
+
+    const note = majorScale[Math.floor(real * majorScale.length)];
+    return this.noteToFrequency(note);
   }
 
   noteToFrequency(note) {
@@ -54,7 +64,7 @@ class Instrument {
   }
 
   frequencyToNote(freq) {
-    return 12 * Math.log(freq / 440) / Math.log(2)
+    return 12 * Math.log2(freq / 440);
   }
 }
 
