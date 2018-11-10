@@ -166,11 +166,12 @@ func (jc *joyconBluetooth) ReadInto(out *jcpc.CombinedState, includeGyro bool) {
 	if jc.side.IsLeft() {
 		out.AdjSticks[0] = jc.calib[0].Adjust(jc.raw_stick[0])
 		out.AdjSticks[0][0] = jc.gyro[0][0] / 2						// pitch axis
+		out.AdjSticks[0][1] = jc.gyro[0][1] / 2						// roll axis
 	}
 	if jc.side.IsRight() {
 		out.AdjSticks[1] = jc.calib[1].Adjust(jc.raw_stick[1])
 		out.AdjSticks[1][0] = jc.gyro[0][0] / 2						// pitch axis
-
+		out.AdjSticks[1][1] = jc.gyro[0][1] / 2						// roll axis (inverted)
 	}
 
 	if includeGyro && jc.haveGyro {
@@ -289,6 +290,7 @@ func (jc *joyconBluetooth) Shutdown() {
 }
 
 func (jc *joyconBluetooth) Reconnect(hidDeviceInfo interface{}) {
+	fmt.Printf("reconnect device")
 	dev := hidDeviceInfo.(*hid.DeviceInfo)
 	jc.mu.Lock()
 	defer jc.mu.Unlock()
@@ -640,12 +642,12 @@ func (jc *joyconBluetooth) handleSPIRead(packet []byte) {
 		jc.buttonColor.A = 255
 		jc.mu.Unlock()
 
-		if true {
-			fmt.Printf("%s: Got factory calibration and button colors\n", jc.serial)
-		}
-		fmt.Printf("%s: SPI read returned [%x+%d]\n%s", jc.serial, addr, length, hex.Dump(data))
+		// if true {
+		// 	fmt.Printf("%s: Got factory calibration and button colors\n", jc.serial)
+		// }
+		// fmt.Printf("%s: SPI read returned [%x+%d]\n%s", jc.serial, addr, length, hex.Dump(data))
 	} else if addr == userStickCalibStart && length == userStickCalibLen {
-		fmt.Printf("%s: SPI read returned [%x+%d]\n%s", jc.serial, addr, length, hex.Dump(data))
+		// fmt.Printf("%s: SPI read returned [%x+%d]\n%s", jc.serial, addr, length, hex.Dump(data))
 		had := false
 		jc.mu.Lock()
 		const magicHaveCalibration = 0xA1B2
@@ -665,7 +667,7 @@ func (jc *joyconBluetooth) handleSPIRead(packet []byte) {
 			fmt.Printf("%s: Checked user stick calibration: %v\n", jc.serial, jc.calib)
 		}
 	} else {
-		fmt.Printf("%s: SPI read returned [%x+%d]\n%s", jc.serial, addr, length, hex.Dump(data))
+		// fmt.Printf("%s: SPI read returned [%x+%d]\n%s", jc.serial, addr, length, hex.Dump(data))
 	}
 
 	jc.mu.Lock()
