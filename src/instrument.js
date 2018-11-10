@@ -25,6 +25,9 @@ class Instrument {
     this.right.type = 'sawtooth';
     this.right.connect(this.rightGain);
     this.right.start()
+
+    this.onplay = null;
+    this.onpause = null;
   }
 
   play(pitch, pan = 0.5) {
@@ -40,10 +43,18 @@ class Instrument {
     this.rightGain.gain.linearRampToValueAtTime(pan, this.ctx.currentTime + delay);
 
     this.volume.gain.setValueAtTime(0.4, this.ctx.currentTime + delay);
+
+    if (this.onplay) {
+      this.onplay(freq);
+    }
   }
 
   pause() {
     this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
+
+    if (this.onpause) {
+      this.onpause();
+    }
   }
 }
 

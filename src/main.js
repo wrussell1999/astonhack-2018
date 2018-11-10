@@ -4,10 +4,44 @@ const {attachHandlers} = require('./handlers');
 const notes = require('./notes');
 
 window.onload = function() {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-
-  let instrument = new Instrument(ctx, majorPentatonicScale);
+  const audio = new (window.AudioContext || window.webkitAudioContext)();
+  let instrument = new Instrument(audio, majorPentatonicScale);
   attachHandlers(instrument, document.getElementById('slider'));
+
+  let canvas = document.getElementById('slider');
+  let ctx = canvas.getContext('2d');
+
+  ctx.fillStyle = 'lightblue';
+
+  let length = 0;
+  let dlength = 4;
+
+  let frequency = Infinity;
+
+  let interval = setInterval(() => {
+    ctx.fillRect(0, 0, 600, 600);
+
+    ctx.beginPath();
+    ctx.moveTo(0, 300);
+    for (let x = 0; x < 600; x++) {
+      let y = 300 + length * Math.sin(x * x * 200 / frequency);
+      ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    length += dlength;
+    if (length >= 100 || length <= -100) {
+      dlength = -dlength;
+    }
+  }, 2)
+
+  instrument.onplay = (freq) => {
+    frequency = freq;
+  }
+
+  instrument.onpause = (freq) => {
+    frequency = Infinity;
+  }
 }
 
 function majorPentatonicScale(pitch) {
