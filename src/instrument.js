@@ -23,7 +23,9 @@ class Instrument {
     this.right.start()
   }
 
-  play(freq, pan = 0.5) {
+  play(pitch, pan = 0.5) {
+    const freq = this.realToFrequency(pitch);
+
     // this smooths out the sounds
     const delay = 0.05;
 
@@ -38,6 +40,13 @@ class Instrument {
 
   pause() {
     this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
+  }
+
+  realToFrequency(real) {
+    const min = 49;
+    const max = 49 + 12;
+    const between = min + real * (max - min);
+    return 440 * Math.pow(2, (between - 49) / 12);
   }
 }
 

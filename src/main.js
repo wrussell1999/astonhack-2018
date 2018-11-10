@@ -10,7 +10,10 @@ function attachHandlers(instrument, element) {
 
   let mouseDown = false;
   element.addEventListener('mousedown', (event) => {
-    instrument.play(event.y, event.x / element.clientWidth);
+    const rect = element.getBoundingClientRect();
+    const y = (event.y - rect.top) / element.clientHeight;
+    const x = (event.x - rect.left) / element.clientWidth;
+    instrument.play(y, x);
 
     mouseDown = true;
     clearTimeout(pauseTimeout);
@@ -22,7 +25,10 @@ function attachHandlers(instrument, element) {
 
   element.addEventListener('mousemove', (event) => {
     if (mouseDown) {
-      instrument.play(event.y, event.x / element.clientWidth);
+      const rect = element.getBoundingClientRect();
+      const y = (event.y - rect.top) / element.clientHeight;
+      const x = (event.x - rect.left) / element.clientWidth;
+      instrument.play(y, x);
     }
   })
 }
