@@ -4,7 +4,9 @@ const {attachHandlers} = require('./handlers');
 const notes = require('./notes');
 
 window.onload = function() {
-  var instrument = new Instrument(majorPentatonicScale);
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+  let instrument = new Instrument(ctx, majorPentatonicScale);
   attachHandlers(instrument, document.getElementById('slider'));
 }
 

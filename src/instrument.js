@@ -1,8 +1,8 @@
 const notes = require('./notes');
 
 class Instrument {
-  constructor(generator) {
-    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+  constructor(ctx, generator) {
+    this.ctx = ctx;
 
     this.generator = generator;
 
