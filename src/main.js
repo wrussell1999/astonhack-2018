@@ -1,26 +1,26 @@
 const {Instrument} = require('./instrument');
-const {attachHandlers} = require('./handlers');
+const handlers = require('./handlers');
 
 const notes = require('./notes');
 
 window.onload = function() {
   const audio = new (window.AudioContext || window.webkitAudioContext)();
   let instrument = new Instrument(audio, majorPentatonicScale);
-  attachHandlers(instrument, document.getElementById('slider'));
+  handlers.attachMouseHandlers(instrument, document.getElementById('slider'));
+  handlers.attachJoyconHandlers(instrument);
 
+  let button = document.getElementById('state_label');
   let button_state = false;
   let state_button = document.getElementById('state_button');
-  state_button.onclick = function (event) {
+  state_button.addEventListener('click', (event) => {
     button_state = !(button_state);
-    let button = document.getElementById('state_label');
     if (button_state == true) {
       button.innerHTML = 'Mouse';
-      console.log(button_state);
     } else if (button_state == false) {
       button.innerHTML = 'JoyCons';
-      console.log(button_state);
     }
-  }
+    handlers.toggleInputs();
+  })
 
   let canvas = document.getElementById('slider');
   let ctx = canvas.getContext('2d');

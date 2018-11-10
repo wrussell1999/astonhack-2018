@@ -1,14 +1,19 @@
-function attachHandlers(instrument, element) {
+let mouseEnabled = false;
+let joyconsEnabled = true;
+
+function attachMouseHandlers(instrument, element) {
   let pauseTimeout = null;
 
   let mouseDown = false;
   element.addEventListener('mousedown', (event) => {
-    const rect = element.getBoundingClientRect();
-    const y = 1.0 - (event.y - rect.top) / element.clientHeight;
-    const x = (event.x - rect.left) / element.clientWidth;
-    instrument.play(y, x);
+    if (mouseEnabled) {
+      const rect = element.getBoundingClientRect();
+      const y = 1.0 - (event.y - rect.top) / element.clientHeight;
+      const x = (event.x - rect.left) / element.clientWidth;
+      instrument.play(y, x);
 
-    mouseDown = true;
+      mouseDown = true;
+    }
     clearTimeout(pauseTimeout);
   })
   document.addEventListener('mouseup', (event) => {
@@ -17,7 +22,7 @@ function attachHandlers(instrument, element) {
   })
 
   element.addEventListener('mousemove', (event) => {
-    if (mouseDown) {
+    if (mouseEnabled && mouseDown) {
       const rect = element.getBoundingClientRect();
       const y = 1.0 - (event.y - rect.top) / element.clientHeight;
       const x = (event.x - rect.left) / element.clientWidth;
@@ -26,6 +31,16 @@ function attachHandlers(instrument, element) {
   })
 }
 
+function attachJoyconHandlers(instrument) {
+}
+
+function toggleInputs() {
+  mouseEnabled = !mouseEnabled;
+  joyconsEnabled = !joyconsEnabled;
+}
+
 module.exports = {
-  attachHandlers: attachHandlers
+  attachMouseHandlers: attachMouseHandlers,
+  attachJoyconHandlers: attachJoyconHandlers,
+  toggleInputs: toggleInputs
 }
