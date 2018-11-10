@@ -1,6 +1,10 @@
+const notes = require('./notes');
+
 class Instrument {
-  constructor() {
+  constructor(generator) {
     this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    this.generator = generator;
 
     this.volume = this.ctx.createGain();
     this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
@@ -24,7 +28,7 @@ class Instrument {
   }
 
   play(pitch, pan = 0.5) {
-    const freq = this.realToFrequency(pitch);
+    const freq = this.generator(pitch);
 
     // this smooths out the sounds
     const delay = 0.05;
@@ -40,31 +44,6 @@ class Instrument {
 
   pause() {
     this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
-  }
-
-  /*
-  realToFrequency(real) {
-    const min = 49;
-    const max = 49 + 12;
-    const between = min + real * (max - min);
-    return this.noteToFrequency(between);
-  }
-  */
-
-  realToFrequency(real) {
-    const base = 49;
-    const majorScale = [base, base + 2, base + 4, base + 7, base + 9];
-
-    const note = majorScale[Math.floor(real * majorScale.length)];
-    return this.noteToFrequency(note);
-  }
-
-  noteToFrequency(note) {
-    return 440 * Math.pow(2, (note - 49) / 12);
-  }
-
-  frequencyToNote(freq) {
-    return 12 * Math.log2(freq / 440);
   }
 }
 
