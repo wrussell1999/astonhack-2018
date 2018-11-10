@@ -46,7 +46,15 @@ class Instrument {
     const min = 49;
     const max = 49 + 12;
     const between = min + real * (max - min);
-    return 440 * Math.pow(2, (between - 49) / 12);
+    return this.noteToFrequency(between);
+  }
+
+  noteToFrequency(note) {
+    return 440 * Math.pow(2, (note - 49) / 12);
+  }
+
+  frequencyToNote(freq) {
+    return 12 * Math.log(freq / 440) / Math.log(2)
   }
 }
 
