@@ -3,49 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <title>Music JoyCons</title>
-    <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
     <title>Main page</title>
   </head>
   <body>
     <h1>Music JoyCons</h1>
-
-
-
     <div class="pad">
     </div>
-    <div id = "input">
-      <input type="button" class="click" id="click" value=" Click" style="width: 45px; height: 20px; padding: 5px; text-align: center; border-radius:2px; padding: 0px; ">  
+    <div id = "input" class="pad">
+      <input type="button" value="Switch Input Type" id="state_button" style="padding: 5px">
       <label class="control-label" id="input_label">Input Type: </label>
-      <label class="control-label" id="state_label"></label>
+      <label  id="state_label"></label>
     </div>
-
-
-
-
 
 
     <pre id="mouse_input" style="background: #eee; height: 1000px">
     </pre>
-    <script>
-      var button_state = false;
-      var mouse_input = document.getElementById('mouse_input');
-
-      mouse_input.onmousemove = function (event) {
-        mouse_input.textContent = 'screen: (' + event.screenX + ', ' + event.screenY + ')\n' +
-          'client: (' + event.clientX + ', ' + event.clientY + ')';
-      };
-      function switchInput() {
-        button_state = !(button_state);
-        var button = document.getElementById("click");
-        if (button_state == true) {
-          button.innerHTML("Mouse");
-        } else if (button_state == false) {
-          bytton.innerHTML("JoyCons");
-        }
-              
-      }
-    </script>
   </body>
 </html>

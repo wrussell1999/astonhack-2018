@@ -7,13 +7,13 @@ body {
 }
 
 .pad {
-  padding: 16px;
+  padding: 10px;
 }
 h1 {
     text-align: center;
 }
 input, label{
-  display: inline-block;
-  vertical-align: middle;
-  margin: 10px 0;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 10px 0;
 }
