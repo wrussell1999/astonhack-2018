@@ -35,8 +35,10 @@ class Instrument {
   }
 
   play(freq) {
-    this.oscillator.frequency.setValueAtTime(freq, this.ctx.currentTime);
-    this.volume.gain.setValueAtTime(0.2, this.ctx.currentTime);
+    // this smooths out the sounds
+    const delay = 0.05;
+    this.oscillator.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
+    this.volume.gain.setValueAtTime(0.2, this.ctx.currentTime + delay);
 
     if (this.playing) {
       clearTimeout(this.playing);
