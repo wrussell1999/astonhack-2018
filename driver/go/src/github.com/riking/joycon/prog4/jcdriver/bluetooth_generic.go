@@ -5,11 +5,13 @@ package main
 import (
 	"sync"
 	"time"
+	"fmt"
 
 	"github.com/riking/joycon/prog4/jcpc"
 )
 
 func getBluetoothManager() (jcpc.BluetoothManager, error) {
+	fmt.Printf("dummy manager created\n")
 	d := &dummyBTManager{}
 	d.chOut = make(chan jcpc.BluetoothDeviceNotification, 1)
 	d.tickerOn = false

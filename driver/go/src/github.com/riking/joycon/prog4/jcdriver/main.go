@@ -1,12 +1,11 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"runtime"
 	"time"
-
+	"github.com/riking/joycon/prog4/bluez"
 	"github.com/riking/joycon/prog4/consoleiface"
 	"github.com/riking/joycon/prog4/jcpc"
 )
@@ -26,14 +25,12 @@ func (i *arrayFlags) Set(value string) error {
 var invertedAxes arrayFlags
 
 func main() {
-	flag.Var(&invertedAxes, "invert", "Stick-Axes to invert. --invert LV inverts the vertical axis of the left stick. Can be specified multiple times.")
-	flag.Parse()
 
 	// need 1 thread per blocked cgo call
 	runtime.GOMAXPROCS(8 + runtime.NumCPU())
 
 	of := getOutputFactory()
-	bt, err := getBluetoothManager()
+	bt, err := bluez.New()
 	if err != nil {
 		fmt.Println("[FATAL] Could not start up bluetooth manager:", err)
 		fmt.Println("You may need different compile options depending on your distribution")

@@ -17,7 +17,7 @@ func getOutputFactory() jcpc.OutputFactory {
 		case jcpc.TypeRight:
 			return output.NewUInput(output.MappingR, fmt.Sprintf("Half Joy-Con %d", playerNum), remap)
 		case jcpc.TypeBoth:
-			return output.NewUInput(output.MappingDual, fmt.Sprintf("Full Joy-Con %d", playerNum), remap)
+			return output.NewUInput(output.MappingDual, fmt.Sprintf("MotionController"), remap)
 		}
 		panic("bad joycon type")
 	}
