@@ -1,10 +1,14 @@
 window.onload = function() {
   var instrument = new Instrument();
 
+  attachHandlers(instrument, document);
+}
+
+function attachHandlers(instrument, element) {
   let pauseTimeout = null;
 
   let mouseDown = false;
-  document.addEventListener('mousedown', (event) => {
+  element.addEventListener('mousedown', (event) => {
     instrument.play(event.clientY);
 
     mouseDown = true;
@@ -15,9 +19,9 @@ window.onload = function() {
     pauseTimeout = setTimeout(() => instrument.pause(), 100)
   })
 
-  document.addEventListener('mousemove', (event) => {
+  element.addEventListener('mousemove', (event) => {
     if (mouseDown) {
-      instrument.play(event.clientY);
+      instrument.play(event.y);
     }
   })
 }
