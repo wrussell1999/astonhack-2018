@@ -5,7 +5,7 @@ const notes = require('./notes');
 
 window.onload = function() {
   const audio = new (window.AudioContext || window.webkitAudioContext)();
-  let instrument = new Instrument(audio, majorPentatonicScale);
+  let instrument = new Instrument(audio, continuous);
   handlers.attachMouseHandlers(instrument, document.getElementById('slider'));
   handlers.attachJoyconHandlers(instrument);
 

@@ -47,9 +47,9 @@ function attachJoyconHandlers(instrument) {
           let y = (gp.axes[gp.axes.length - 1] + 1) / 2;
           let x = (gp.axes[gp.axes.length - 2] + 1) / 2;
           instrument.play(y, x);
-      } else {
+        } else {
           instrument.pause();
-      }
+        }
       })
     }
   })
