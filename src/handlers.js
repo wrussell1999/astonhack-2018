@@ -1,21 +1,21 @@
 let mouseEnabled = false;
 let joyconsEnabled = true;
 
-function attachMouseHandlers(instrument, element) {
+function attachMouseHandlers(sounds, element) {
   let mouseDown = false;
   element.addEventListener('mousedown', (event) => {
     if (mouseEnabled) {
       const rect = element.getBoundingClientRect();
       const y = 1.0 - (event.y - rect.top) / element.clientHeight;
       const x = (event.x - rect.left) / element.clientWidth;
-      instrument.play(y, x);
+      sounds.main.play(y, x);
 
       mouseDown = true;
     }
   })
   document.addEventListener('mouseup', (event) => {
     mouseDown = false;
-    instrument.pause();
+    sounds.main.pause();
   })
 
   element.addEventListener('mousemove', (event) => {
@@ -23,7 +23,13 @@ function attachMouseHandlers(instrument, element) {
       const rect = element.getBoundingClientRect();
       const y = 1.0 - (event.y - rect.top) / element.clientHeight;
       const x = (event.x - rect.left) / element.clientWidth;
-      instrument.play(y, x);
+      sounds.main.play(y, x);
+    }
+  })
+
+  document.addEventListener('keypress', (event) => {
+    if (mouseEnabled && event.code == 'Space') {
+      sounds.drum.play();
     }
   })
 }
@@ -33,7 +39,6 @@ function attachJoyconHandlers(instrument) {
 
   window.addEventListener('gamepadconnected', (event) => {
     let gp = event.gamepad;
-    // if (gp.id.endsWith('-MotionLeft') || gp.id.endsWith('-MotionRight')) {
     if (gp.id.endsWith('-MotionLeft')) {
       interval = setInterval(() => {
         let pressed = false;
@@ -53,6 +58,8 @@ function attachJoyconHandlers(instrument) {
           }
         }
       })
+    } else if (gp.id.endsWith('-MotionRight')) {
+      // drum playing goes here...
     }
   })
 

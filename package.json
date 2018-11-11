@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/jedevc/hack-aston#readme",
   "devDependencies": {
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
     "favicons-webpack-plugin": "0.0.9",
     "html-webpack-plugin": "^3.2.0",

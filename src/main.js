@@ -5,9 +5,17 @@ const notes = require('./notes');
 
 window.onload = function() {
   const audio = new (window.AudioContext || window.webkitAudioContext)();
+
   let instrument = new Instrument(audio, continuous);
-  handlers.attachMouseHandlers(instrument, document.getElementById('slider'));
-  handlers.attachJoyconHandlers(instrument);
+  let drum = new Audio('/sounds/bass_drum.wav');
+
+  let sounds = {
+    main: instrument,
+    drum: drum
+  }
+  handlers.attachMouseHandlers(sounds, document.getElementById('slider'));
+  handlers.attachJoyconHandlers(sounds);
+
 
   let button = document.getElementById('state_label');
   let button_state = false;
