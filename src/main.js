@@ -16,7 +16,6 @@ window.onload = function() {
   handlers.attachMouseHandlers(sounds, document.getElementById('slider'));
   handlers.attachJoyconHandlers(sounds);
 
-
   let button = document.getElementById('state_label');
   let button_state = false;
   let state_button = document.getElementById('state_button');
@@ -42,13 +41,11 @@ window.onload = function() {
     ctx.strokeRect(0, 0, window.innerWidth, window.innerHeight);
     ctx.fillStyle = '#363636';
     ctx.strokeStyle = '#f45954';
-    console.log("Redraw");
   }
 
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    console.log("resizeCanvas");
     redraw();
   }
 
@@ -85,8 +82,6 @@ window.onload = function() {
     frequency = Infinity;
   }
 }
-
-
 
 function majorPentatonicScale(pitch) {
   const base = 49;
