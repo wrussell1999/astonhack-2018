@@ -377,7 +377,6 @@ outer:
 		// Check for reconnects
 		for _, jc := range m.wantReconnect {
 			if jc.Serial() == dev.SerialNumber && jc.WantsReconnect() {
-				fmt.Printf("trying reconnect\n")
 				jc.Reconnect(dev)
 				continue outer
 			}

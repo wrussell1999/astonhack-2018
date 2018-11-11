@@ -336,7 +336,7 @@ func (o *uinput) ButtonUpdate(b jcpc.ButtonID, state bool) {
 func (o *uinput) StickUpdate(axis jcpc.AxisID, value int16) {
 	var code uint16
 	var ok bool
-	var invert bool
+	// var invert bool
 
 	for _, e := range o.axes {
 		if e.Axis == axis {
