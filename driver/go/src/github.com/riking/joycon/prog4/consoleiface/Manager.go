@@ -170,6 +170,7 @@ func (m *Manager) doPairing_(idx1, idx2 int) {
 	if idx2 == -1 && m.unpaired[idx1].jc.Type() != jcpc.TypeBoth {
 		fmt.Println("pairing single")
 		jc := m.unpaired[idx1].jc
+		jc.EnableGyro(true)
 		o, err := m.outputFactory(jc.Type(), pNum, m.options.InputRemapping)
 		if err != nil {
 			fmt.Println("[FATAL] Failed to create controller output:", err)
@@ -349,7 +350,7 @@ func (m *Manager) JoyConUpdate(jc jcpc.JoyCon, flags int) {
 				}
 			}
 			if up.curButtons.HasAny(diff) {
-				fmt.Printf("Plonk! (u%d)\n", idx)
+				fmt.Printf("Button press on controller %d)\n", idx)
 				// make a sound on the ui?
 			}
 		} else {
