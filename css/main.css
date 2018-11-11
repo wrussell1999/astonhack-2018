@@ -22,15 +22,11 @@ label {
     font-family: 'Open Sans Light', sans-serif;
     
 }
-input, label{
-    display: inline-block;
-    vertical-align: middle;
-    margin: 10px 0;
-    
-}
+
 a {
     font-family: 'Open Sans', sans-serif;
-    right: 50px
+    right: 50px;
+    width: 120px;
 }
 
 div {
