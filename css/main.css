@@ -5,16 +5,24 @@ html {
 
 body {
     margin: 0;
-    
+    background-color: #081920;
 }
 
 h1 {
     text-align: center;
-    padding: 10px;
+    color: #ffffff;
 }
 .joycon {
     margin: 5px;
-    height: 60px; 
+    height: 100px; 
+}
+.top {
+    border-bottom: 6px;
+    border-bottom-color: #2f3f47;
+}
+
+label {
+    color: #ffffff;
 }
 input, label{
     display: inline-block;

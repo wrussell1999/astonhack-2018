@@ -8,19 +8,18 @@
     <title>Notendo Tunes</title>
   </head>
   <body>
-    <h1><img src="/images/left-joycon.png" class="joycon" style="-webkit-transform: scaleX(-1); transform: scaleX(-1)" alt="Left JoyCon">Notendo Tunes<img src="/images/right-joycon.png" class="joycon" alt="Right JoyCon"></h1>
-    <div class="pad">
+    <div class="top">
+      <h1><img src="/images/left-joycon.png" class="joycon" style="-webkit-transform: scaleX(-1); transform: scaleX(-1)" alt="Left JoyCon">Notendo Tunes<img src="/images/right-joycon.png" class="joycon" alt="Right JoyCon"></h1>
+      <div id = "input" style="padding: 10px">
+        <a id="state_button" class="btn btn-primary" style="margin: 10px; ; background-color: #62727b" href="#" role="button">Input Type</a>
+        <label class="control-label" id="input_label">Input Type: </label>
+        <label id="state_label">JoyCons</label>
+          
+          
+        <a id="scale_button" class="btn btn-primary" style="margin: 10px; ; background-color: #62727b" href="#" role="button">Change Scale</a>
+        <label id="scale_label"></label>
+      </div>
     </div>
-    <a class="btn btn-primary" style="margin: 10px" href="#" role="button">Link</a>
-    <div id = "input" style="padding: 10px">
-      <input type="button" value="Switch Input Type" id="state_button" style="padding: 5px">
-      <label class="control-label" id="input_label">Input Type: </label>
-      <label id="state_label">JoyCons</label>
-
-      <button id="scale_button" style="padding: 5px">Change Scale</button> 
-      <label id="scale_label"></label>
-    </div>
-
     <canvas id='slider' margin: 0px></canvas>
   </body>
 </html>

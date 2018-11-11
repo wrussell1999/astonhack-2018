@@ -55,7 +55,7 @@ window.onload = function() {
   
   function redraw() {
     ctx.strokeRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.fillStyle = '#363636';
+    ctx.fillStyle = '#102027';
     ctx.strokeStyle = '#f45954';
   }
 
@@ -65,7 +65,7 @@ window.onload = function() {
     redraw();
   }
 
-  ctx.fillStyle = '#363636';
+  ctx.fillStyle = '#102027';
   ctx.strokeStyle = '#f45954';
 
   let length = 0;
