@@ -63,7 +63,6 @@ class Instrument {
 
   pause() {
     // this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
-    console.log(this.volume.gain.value)
     if (this.volume.gain.value > 0.1) {
       this.volume.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.4);
     }
