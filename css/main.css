@@ -5,6 +5,7 @@ html {
 
 body {
     margin: 0;
+    height: 100%;
     overflow: hidden;
 }
 
@@ -19,4 +20,8 @@ input, label{
     display: inline-block;
     vertical-align: middle;
     margin: 10px 0;
+}
+
+#slider {
+    display: block;
 }
