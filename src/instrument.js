@@ -42,7 +42,7 @@ class Instrument {
     const freq = this.generator(pitch);
 
     // this smooths out the sounds
-    const delay = 0.05;
+    const delay = 0.3;
 
     this.left.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
     this.right.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
