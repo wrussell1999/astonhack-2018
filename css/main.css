@@ -1,4 +1,55 @@
 html {
-  background-color: lightgrey;
-  font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    margin: 0;
+    background-color: #081920;
+
+    height: 100%;
+    overflow: hidden;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+}
+.joycon {
+    height: 100px; 
+}
+
+label {
+    color: #ffffff;
+    font-family: 'Open Sans Light', sans-serif;
+}
+
+a {
+    font-family: 'Open Sans', sans-serif;
+    right: 50px;
+    width: 120px;
+}
+
+div {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.links {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 5px;
+    left: 10px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.links:hover {
+    opacity: 1.0;
+    transition: 0.3s;
+}
+
+#slider {
+    display: block;
 }

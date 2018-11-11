@@ -2,10 +2,25 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    
+
     <title>Notendo Tunes</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
-    <h1>Notendo Tunes</h1>
+      <h1><img src="/images/left-joycon.png" class="joycon" style="-webkit-transform: scaleX(-1); transform: scaleX(-1)" alt="Left JoyCon">Notendo Tunes<img src="/images/right-joycon.png" class="joycon" alt="Right JoyCon"></h1>
+    <a href="https://github.com/jedevc/hack-aston"><img src="/images/octocat.png" class="links"></a>
+    <div>
+      <label class="control-label" id="input_label">Input Type: </label>
+      <label id="state_label">JoyCons</label>
+      <a id="state_button" class="btn btn-primary" style="margin: 10px; background-color: #62727b" role="button">Input Type</a>
+    </div>
+
+    <div style="top: +50px;">
+      <label id="scale_label"></label>
+      <a id="scale_button" class="btn btn-primary" style="margin: 10px; background-color: #62727b;" role="button">Change Scale</a>
+    </div>
+    <canvas id='slider' margin: 0px></canvas>
   </body>
 </html>

@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 plugins: 
 module.exports = {
@@ -22,7 +22,9 @@ module.exports = {
     new FaviconsWebpackPlugin('./logo.png'),
     new HtmlWebpackPlugin({
       template: 'index.html'
-    })
-    
+    }),
+    new CopyWebpackPlugin([
+      'static'
+    ])
   ]
 };
