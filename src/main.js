@@ -43,8 +43,6 @@ window.onload = function() {
 
     ctx.beginPath();
     ctx.moveTo(0, window.innerHeight/3);
-    console.log("canvas height: " + canvas.height/2);
-    console.log("window height: " + window.innerHeight/2);
     for (let x = 0; x < canvas.width; x++) {
       let y = (window.innerHeight/3) + length * Math.sin(x * x * 200 / frequency);
       ctx.lineTo(x, y);
