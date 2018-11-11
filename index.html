@@ -4,19 +4,20 @@
     <meta charset="UTF-8" />
     <title>Notendo Tunes</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <title>Notendo Tunes</title>
   </head>
   <body>
-    <h1><img src="/images/left-joycon.png" style="height: 50px;" alt="Left JoyCon">Notendo Tunes<img src="/images/right-joycon.png" style="height: 50px;" alt="Right JoyCon"></h1>
+    <h1><img src="/images/left-joycon.png" class="joycon" style="-webkit-transform: scaleX(-1); transform: scaleX(-1)" alt="Left JoyCon">Notendo Tunes<img src="/images/right-joycon.png" class="joycon" alt="Right JoyCon"></h1>
     <div class="pad">
     </div>
-    <div id = "input" class="pad">
+    <a class="btn btn-primary" style="margin: 10px" href="#" role="button">Link</a>
+    <div id = "input" style="padding: 10px">
       <input type="button" value="Switch Input Type" id="state_button" style="padding: 5px">
       <label class="control-label" id="input_label">Input Type: </label>
       <label id="state_label">JoyCons</label>
 
-      <button id="scale_button">Change scale</button> 
+      <button id="scale_button" style="padding: 5px">Change Scale</button> 
       <label id="scale_label"></label>
     </div>
 
