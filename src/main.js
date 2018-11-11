@@ -3,17 +3,28 @@ const handlers = require('./handlers');
 
 const notes = require('./notes');
 
-window.onload = function() {
-  const audio = new (window.AudioContext || window.webkitAudioContext)();
+const audio = new (window.AudioContext || window.webkitAudioContext)();
+let soundBuffers = {};
 
+window.onload = function() {
   let instrument = new Instrument(audio, continuous);
-  let drum = new Audio('/sounds/bass_drum.wav');
-  let hihat = new Audio('/sounds/hihat.wav');
+
+  loadSound("static/sounds/bass_drum.wav");
+  loadSound("static/sounds/hihat.wav");
+
+
+  let drum_play = function() {
+    playSound(soundBuffers["static/sounds/bass_drum.wav"]);
+  }
+
+  let hithat_play = function() {
+    playSound(soundBuffers["static/sounds/hihat.wav"]);
+  }
 
   let sounds = {
     main: instrument,
-    drum: drum,
-    hihat: hihat
+    drum: drum_play,
+    hihat: hithat_play
   }
   handlers.attachMouseHandlers(sounds, document.getElementById('slider'));
   handlers.attachJoyconHandlers(sounds);
@@ -105,4 +116,24 @@ function continuous(pitch) {
   const max = 49 + 12;
   const between = min + pitch * (max - min);
   return notes.noteToFrequency(between);
+}
+
+function loadSound(url) {
+  var request = new XMLHttpRequest();
+  request.open('GET', url, true);
+  request.responseType = 'arraybuffer';
+  request.url = url;
+  // Decode asynchronously
+  request.onload = function() {
+    audio.decodeAudioData(request.response, function(buffer) {
+      soundBuffers[request.url] = buffer;
+  }); }
+  request.send();
+}
+
+function playSound(buffer) {
+  var source = audio.createBufferSource(); // creates a sound source
+  source.buffer = buffer;                    // tell the source which sound to play
+  source.connect(audio.destination);       // connect the source to the context's destination (the speakers)
+  source.start(0);                           // play the source now
 }
