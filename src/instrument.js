@@ -59,7 +59,8 @@ class Instrument {
   }
 
   pause() {
-    this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
+    // this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
+    this.volume.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.4);
 
     if (this.onpause) {
       this.onpause();
