@@ -41,84 +41,41 @@ function attachMouseHandlers(sounds, element) {
 function attachJoyconHandlers(sounds) {
   let interval = null;
 
-  window.addEventListener('gamepadconnected', (event) => {
-    let gp = event.gamepad;
-    if (gp.id.endsWith('-MotionLeft')) {
-      let drumSounded = false;
+  let drumSounded = false;
 
-      interval = setInterval(() => {
-        let pressed = false;
-        for (let i = 0; i < gp.buttons.length; i++) {
-          if (gp.buttons[i].pressed) {
-            pressed = true;
-            break;
-          }
-        }
-        pressed = true;
+  interval = setInterval(() => {
+    let controller =  navigator.getGamepads()[2];
+    let enableThero = false;
+    let altDrum = false;
 
-        if (joyconsEnabled) {
-          if (pressed) {
-            console.log(y, x);
-            let y = (gp.axes[2] + 1) / 2;
-            let x = (gp.axes[3] + 1) / 2;
-            sounds.main.play(y, x);
-          } else {
-            sounds.main.pause();
-          }
+    if(controller.buttons[6].pressed) {
+      enableThero = true;
+    }
 
-          /*
-          if (!drumSounded && gp.axes[gp.axes.length - 1] == 1) {
-            drumSounded = true;
-            sounds.drum()
-          }
-          */
-        }
-      })
-    /*
-    if (gp.id.endsWith('-MotionLeft')) {
-      interval = setInterval(() => {
-        let pressed = false;
-        for (let i = 0; i < gp.buttons.length; i++) {
-          if (gp.buttons[i].pressed) {
-            pressed = true;
-            break;
-          }
-        }
-        if (joyconsEnabled) {
-          if (pressed) {
-            let y = (gp.axes[gp.axes.length - 1] + 1) / 2;
-            let x = (gp.axes[gp.axes.length - 2] + 1) / 2;
-            sounds.main.play(y, x);
-          } else {
-            sounds.main.pause();
-          }
-        }
-      })
-    } else if (gp.id.endsWith('-MotionRight')) {
-      let drumSounded = false;
-      interval = setInterval(() => {
-        if (joyconsEnabled) {
-          if (!drumSounded && gp.axes[gp.axes.length - 1] == 1) {
-            drumSounded = true;
-            let pressed = false;
-            for (let i = 0; i < gp.buttons.length; i++) {
-              if (gp.buttons[i].pressed) {
-                pressed = true;
-                break;
-              }
-            }
+    if (controller.buttons[7].pressed) {
+      altDrum = true;
+    }
 
-            if (pressed) {
-              sounds.hihat();
-            } else {
-              sounds.drum();
-            }
-          } else if (drumSounded && gp.axes[gp.axes.length - 1] != 1) {
-            drumSounded = false;
-          }
+    if (joyconsEnabled) {
+      if (enableThero) {
+        let y = (controller.axes[2] + 1) / 2;
+        let x = (controller.axes[3] + 1) / 2;
+        sounds.main.play(y, x);
+      } else {
+        sounds.main.pause();
+      }
+
+      
+      if (!drumSounded && controller.axes[controller.axes.length - 2] == 1) {
+        drumSounded = true;
+        if (altDrum) {
+          sounds.hihat();
+        } else {
+          sounds.drum();
         }
-      })
-      */
+      } else if (controller.axes[controller.axes.length - 2] < 0.5) {
+        drumSounded = false;
+      }
     }
   })
 
