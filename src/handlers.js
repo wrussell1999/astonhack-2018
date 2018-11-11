@@ -66,7 +66,19 @@ function attachJoyconHandlers(sounds) {
       interval = setInterval(() => {
         if (joyconsEnabled) {
           if (gp.axes[gp.axes.length - 1] == 1) {
-            sounds.drum.play();
+            let pressed = false;
+            for (let i = 0; i < gp.buttons.length; i++) {
+              if (gp.buttons[i].pressed) {
+                pressed = true;
+                break;
+              }
+            }
+
+            if (pressed) {
+              sounds.hihat.play();
+            } else {
+              sounds.drum.play();
+            }
           }
         }
       })
