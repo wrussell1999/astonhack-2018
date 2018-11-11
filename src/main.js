@@ -13,11 +13,19 @@ window.onload = function() {
   loadSound("static/sounds/hihat.wav");
 
   let drum_play = function() {
+    drum_target_frequency = 400;
     playSound(soundBuffers["static/sounds/bass_drum.wav"]);
+    window.setTimeout(reset_target, 100);
   }
 
   let hithat_play = function() {
+    drum_target_frequency = 400;
     playSound(soundBuffers["static/sounds/hihat.wav"]);
+    window.setTimeout(reset_target, 100);
+  }
+
+  function reset_target() {
+    drum_target_frequency = base_frequency;
   }
 
   let sounds = {
@@ -57,6 +65,7 @@ window.onload = function() {
 
   const fill_colour = '#363636';
   const stroke_colour = '#f45954';
+  const drum_stroke_colour = '#60d4e1';
 
   window.addEventListener('resize', resizeCanvas, false);
 
@@ -65,24 +74,32 @@ window.onload = function() {
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = fill_colour;
-    ctx.strokeStyle = stroke_colour;
-    ctx.stroke();
+    clear_canvas();
   }
 
-  const base_frequency = 50;
+  const base_frequency = 10;
+
+  let drum_target_frequency = base_frequency;
+  let drum_current_frequency = drum_target_frequency;
 
   let target_frequency = base_frequency;
   let current_frequency = target_frequency;
   let hysteresis_value = 5;
 
   function callback() {
-    draw_frame();
+    clear_canvas();
+    draw_thero();
+    draw_drum();
     window.requestAnimationFrame(callback);
   }
 
-  function draw_frame() {
+  function clear_canvas() {
+    ctx.fillStyle = fill_colour;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.stroke();
+  }
+
+  function draw_thero() {
     if (current_frequency < (target_frequency - hysteresis_value)) {
       current_frequency += 0.08 * (target_frequency - current_frequency);
     } else if (current_frequency > (target_frequency + hysteresis_value)) {
@@ -91,12 +108,32 @@ window.onload = function() {
 
     let base_amplitude = canvas.height / 3;
 
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = drum_stroke_colour;
 
     ctx.beginPath();
     ctx.lineWidth = 5;
     for (let x = 0; x < canvas.width; x += 2) {
       let y = (canvas.height/2.4) + base_amplitude * Math.sin((x + 700) * Math.pow(current_frequency,3) * 0.0000000001);
+      ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+  }
+
+  function draw_drum() {
+    if (drum_current_frequency < (drum_target_frequency - hysteresis_value)) {
+      drum_current_frequency += 0.2 * (drum_target_frequency - drum_current_frequency);
+    } else if (drum_current_frequency > (drum_target_frequency + hysteresis_value)) {
+      drum_current_frequency -= 0.8 * (current_frequency - drum_target_frequency);
+    }
+
+    let base_amplitude = canvas.height / 6;
+
+    ctx.strokeStyle = stroke_colour;
+
+    ctx.beginPath();
+    ctx.lineWidth = 5;
+    for (let x = 0; x < canvas.width; x += 2) {
+      let y = (canvas.height/2.4) + base_amplitude * Math.sin((x + 1500) * Math.pow(drum_current_frequency,3) * 0.0000000001);
       ctx.lineTo(x, y);
     }
     ctx.stroke();
