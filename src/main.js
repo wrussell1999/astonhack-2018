@@ -71,7 +71,6 @@ window.onload = function() {
 
     ctx.beginPath();
     ctx.lineWidth = 5;
-    // ctx.moveTo(0, canvas.height/2);
     for (let x = 0; x < canvas.width; x += 2) {
       let y = (canvas.height/2) + (canvas.height/4) * Math.sin((x + 500) * Math.pow(current_frequency,3) * 0.0000000001);
       ctx.lineTo(x, y);
