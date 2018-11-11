@@ -41,3 +41,7 @@ To test the project:
 	$ npm run start
 
 The server will then be listening on port 8080.
+
+## License
+
+All the code written by us is available under the MIT license.
