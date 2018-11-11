@@ -4,7 +4,7 @@ const handlers = require('./handlers');
 const notes = require('./notes');
 
 window.onload = function() {
-  const scales = [continuous, majorPentatonicScale];
+  const scales = [continuous, majorPentatonicScale, minorPentatonicScale];
   let scaleIndex = 0;
   let scale_button = document.getElementById('scale_button');
   let scale_label = document.getElementById('scale_label');
@@ -101,7 +101,15 @@ window.onload = function() {
 
 function majorPentatonicScale(pitch) {
   const base = 49;
-  const majorScale = [base, base + 2, base + 4, base + 7, base + 9];
+  const majorScale = [base, base + 2, base + 4, base + 7, base + 9, base + 12];
+
+  const note = majorScale[Math.floor(pitch * majorScale.length)];
+  return notes.noteToFrequency(note);
+}
+
+function minorPentatonicScale(pitch) {
+  const base = 49;
+  const majorScale = [base, base + 3, base + 5, base + 7, base + 10, base + 12];
 
   const note = majorScale[Math.floor(pitch * majorScale.length)];
   return notes.noteToFrequency(note);
