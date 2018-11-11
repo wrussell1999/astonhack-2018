@@ -41,13 +41,17 @@ window.onload = function() {
     handlers.toggleInputs();
   })
 
-  scale_button.addEventListener('click', (event) => {
+  const scales = [continuous, majorPentatonicScale, minorPentatonicScale];
+  let scaleIndex = 0;
+  let click_handle = () => {
     instrument.generator = scales[scaleIndex];
     scale_label.innerHTML = instrument.generator.name;
     if (++scaleIndex >= scales.length) {
       scaleIndex = 0;
     }
-  })
+  }
+  scale_button.addEventListener('click', click_handle);
+  click_handle(null);
 
   let canvas = document.getElementById('slider');
 
