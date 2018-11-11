@@ -4,9 +4,15 @@ const handlers = require('./handlers');
 const notes = require('./notes');
 
 window.onload = function() {
+  const scales = [continuous, majorPentatonicScale];
+  let scaleIndex = 0;
+  let scale_button = document.getElementById('scale_button');
+  let scale_label = document.getElementById('scale_label');
+  scale_label.innerHTML = scales[scaleIndex].name;
+
   const audio = new (window.AudioContext || window.webkitAudioContext)();
 
-  let instrument = new Instrument(audio, continuous);
+  let instrument = new Instrument(audio, scales[scaleIndex++]);
   let drum = new Audio('/sounds/bass_drum.wav');
   let hihat = new Audio('/sounds/hihat.wav');
 
@@ -29,6 +35,14 @@ window.onload = function() {
       button.innerHTML = 'JoyCons';
     }
     handlers.toggleInputs();
+  })
+
+  scale_button.addEventListener('click', (event) => {
+    instrument.generator = scales[scaleIndex];
+    scale_label.innerHTML = instrument.generator.name;
+    if (++scaleIndex >= scales.length) {
+      scaleIndex = 0;
+    }
   })
 
   let canvas = document.getElementById('slider');
