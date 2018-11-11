@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"runtime"
@@ -25,6 +26,8 @@ func (i *arrayFlags) Set(value string) error {
 var invertedAxes arrayFlags
 
 func main() {
+	flag.Var(&invertedAxes, "invert", "Stick-Axes to invert. --invert LV inverts the vertical axis of the left stick. Can be specified multiple times.")
+	flag.Parse()
 
 	// need 1 thread per blocked cgo call
 	runtime.GOMAXPROCS(8 + runtime.NumCPU())

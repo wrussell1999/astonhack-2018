@@ -341,7 +341,7 @@ func (o *uinput) StickUpdate(axis jcpc.AxisID, value int16) {
 	for _, e := range o.axes {
 		if e.Axis == axis {
 			code, ok = linuxKeyMap[e.Name]
-			invert = e.Invert
+			// invert = e.Invert
 			break
 		}
 	}
@@ -350,9 +350,9 @@ func (o *uinput) StickUpdate(axis jcpc.AxisID, value int16) {
 	}
 
 	val := int32(value)
-	if invert {
-		val = val 		//don't invert
-	}
+	// if invert {
+	// 	val = val 		//don't invert
+	// }
 	o.pending = append(o.pending, uinputEvent{
 		Type:  C.EV_ABS,
 		Code:  code,

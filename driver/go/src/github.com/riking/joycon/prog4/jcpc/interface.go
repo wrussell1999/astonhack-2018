@@ -129,7 +129,7 @@ type CombinedState struct {
 	Gyro [3]GyroFrame
 	// [left, right][horizontal, vertical]
 	// range is -0x7FF to +0x7FF
-	AdjSticks [3][2]int16
+	AdjSticks [2][2]int16
 	Buttons   ButtonState
 	// battery is per joycon, can't be combined
 }

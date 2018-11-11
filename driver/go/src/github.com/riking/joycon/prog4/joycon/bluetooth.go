@@ -50,6 +50,9 @@ type joyconBluetooth struct {
 	subcommandQueue [][]byte
 
 	spiReads []spiReadCallback
+
+	frameNumber int16
+	active bool
 }
 
 func NewBluetooth(hidHandle *hid.Device, side jcpc.JoyConType, ui jcpc.Interface) (jcpc.JoyCon, error) {
@@ -67,6 +70,10 @@ func NewBluetooth(hidHandle *hid.Device, side jcpc.JoyConType, ui jcpc.Interface
 	jc.haveColors = false
 	jc.mode = jcpc.InputLazyButtons
 	jc.isAlive = true
+
+	//custom
+	jc.frameNumber = 0;
+	jc.active = false
 
 	go jc.reader()
 
@@ -177,6 +184,8 @@ func (jc *joyconBluetooth) ReadInto(out *jcpc.CombinedState, includeGyro bool) {
 	if includeGyro && jc.haveGyro {
 		out.Gyro = jc.gyro // TODO 6axis calibration
 	}
+
+	jc.active = true
 }
 
 func (jc *joyconBluetooth) SendCustomSubcommand(d []byte) {
@@ -348,8 +357,12 @@ func (jc *joyconBluetooth) OnFrame() {
 		return
 	}
 
-	jc.sendRumble(true)
-	// jc.Battery()
+	if (jc.active && jc.frameNumber % 100 == 0) {
+		fmt.Printf("fired\n")
+		// jc.sendRumble(true)
+		jc.Battery()
+	}
+	jc.frameNumber++
 }
 
 // mu must be held
@@ -417,8 +430,6 @@ func (jc *joyconBluetooth) sendRumble(forceUpdate bool) {
 }
 
 func (jc *joyconBluetooth) onReadError(err error) {
-	fmt.Printf("[ ERR] JoyCon %s read error: %v\n", jc.serial, err)
-
 	jc.mu.Lock()
 	if jc.isShutdown {
 		fmt.Printf("joycon shutdown\n")
@@ -431,7 +442,7 @@ func (jc *joyconBluetooth) onReadError(err error) {
 	}
 	jc.hidHandle = nil
 
-
+	fmt.Printf("[ ERR] JoyCon %s read error: %v\n", jc.serial, err)
 	jc.mu.Unlock()
 
 	go notify(jc, jcpc.NotifyConnection, jc.ui, jc.controller)
