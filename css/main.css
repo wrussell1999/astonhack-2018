@@ -16,16 +16,26 @@ h1 {
     margin: 5px;
     height: 100px; 
 }
-.top {
-    border-bottom: 6px;
-    border-bottom-color: #2f3f47;
-}
 
 label {
     color: #ffffff;
+    font-family: 'Open Sans Light', sans-serif;
+    
 }
 input, label{
     display: inline-block;
     vertical-align: middle;
     margin: 10px 0;
+    
+}
+a {
+    font-family: 'Open Sans', sans-serif;
+    right: 50px
+}
+
+div {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+
 }
