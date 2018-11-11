@@ -63,7 +63,7 @@ window.onload = function() {
 
   let canvas = document.getElementById('slider');
 
-  const fill_colour = '#363636';
+  const fill_colour = '#081920';
   const stroke_colour = '#f45954';
   const drum_stroke_colour = '#60d4e1';
 
