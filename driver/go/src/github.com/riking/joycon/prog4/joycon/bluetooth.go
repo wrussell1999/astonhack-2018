@@ -172,8 +172,8 @@ func (jc *joyconBluetooth) ReadInto(out *jcpc.CombinedState, includeGyro bool) {
 	}
 	if jc.side.IsRight() {
 		out.AdjSticks[1] = jc.calib[1].Adjust(jc.raw_stick[1])
-		out.AdjSticks[1][0] = jc.gyro[0][5] / 2					// yaw rate of change
-		out.AdjSticks[1][1] = jc.gyro[0][4] / 2					// pitch rate of change
+		out.AdjSticks[1][1] = jc.gyro[0][3] / 2							// yaw rate of change
+		out.AdjSticks[1][0] = -(jc.gyro[0][4]) / 2					// pitch rate of change
 	}
 
 	if includeGyro && jc.haveGyro {
