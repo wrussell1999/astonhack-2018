@@ -51,7 +51,8 @@ class Instrument {
     this.leftGain.gain.linearRampToValueAtTime(1.0 - pan, this.ctx.currentTime + delay);
     this.rightGain.gain.linearRampToValueAtTime(pan, this.ctx.currentTime + delay);
 
-    this.volume.gain.setValueAtTime(0.1, this.ctx.currentTime + delay);
+    // this.volume.gain.setValueAtTime(0.1, this.ctx.currentTime + delay);
+    this.volume.gain.linearRampToValueAtTime(0.1, this.ctx.currentTime + delay + 0.1);
 
     if (this.onplay) {
       this.onplay(freq);
