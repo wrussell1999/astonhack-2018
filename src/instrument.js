@@ -42,7 +42,7 @@ class Instrument {
     const freq = this.generator(pitch);
 
     // this smooths out the sounds
-    const delay = 0.3;
+    const delay = 0.05;
 
     this.left.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
     this.right.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
@@ -52,7 +52,9 @@ class Instrument {
     this.rightGain.gain.linearRampToValueAtTime(pan, this.ctx.currentTime + delay);
 
     // this.volume.gain.setValueAtTime(0.1, this.ctx.currentTime + delay);
-    this.volume.gain.linearRampToValueAtTime(0.1, this.ctx.currentTime + delay + 0.1);
+    if (this.volume.gain.value == 0) {
+      this.volume.gain.linearRampToValueAtTime(0.1, this.ctx.currentTime + delay + 0.1);
+    }
 
     if (this.onplay) {
       this.onplay(freq);
@@ -61,7 +63,10 @@ class Instrument {
 
   pause() {
     // this.volume.gain.setValueAtTime(0, this.ctx.currentTime);
-    this.volume.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.4);
+    console.log(this.volume.gain.value)
+    if (this.volume.gain.value > 0.1) {
+      this.volume.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 0.4);
+    }
 
     if (this.onpause) {
       this.onpause();
