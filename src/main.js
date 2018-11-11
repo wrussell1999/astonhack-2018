@@ -1,12 +1,34 @@
 const {Instrument} = require('./instrument');
-const {attachHandlers} = require('./handlers');
+const handlers = require('./handlers');
 
 const notes = require('./notes');
 
 window.onload = function() {
   const audio = new (window.AudioContext || window.webkitAudioContext)();
-  let instrument = new Instrument(audio, majorPentatonicScale);
-  attachHandlers(instrument, document.getElementById('slider'));
+
+  let instrument = new Instrument(audio, continuous);
+  let drum = new Audio('/sounds/bass_drum.wav');
+
+  let sounds = {
+    main: instrument,
+    drum: drum
+  }
+  handlers.attachMouseHandlers(sounds, document.getElementById('slider'));
+  handlers.attachJoyconHandlers(sounds);
+
+
+  let button = document.getElementById('state_label');
+  let button_state = false;
+  let state_button = document.getElementById('state_button');
+  state_button.addEventListener('click', (event) => {
+    button_state = !(button_state);
+    if (button_state == true) {
+      button.innerHTML = 'Mouse';
+    } else if (button_state == false) {
+      button.innerHTML = 'JoyCons';
+    }
+    handlers.toggleInputs();
+  })
 
   let canvas = document.getElementById('slider');
 
@@ -79,17 +101,4 @@ function continuous(pitch) {
   const max = 49 + 12;
   const between = min + pitch * (max - min);
   return notes.noteToFrequency(between);
-}
-
-var button_state = false;
-state_button.onclick =  function (event) {
-  button_state = !(button_state);
-  var button = document.getElementById("state_label");
-  if (button_state == true) {
-    button.innerHTML = "Mouse";
-    console.log(button_state);
-  } else if (button_state == false) {
-    button.innerHTML = "JoyCons";
-    console.log(button_state);
-  }
 }
