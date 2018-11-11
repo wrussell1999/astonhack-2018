@@ -172,8 +172,8 @@ func (jc *joyconBluetooth) ReadInto(out *jcpc.CombinedState, includeGyro bool) {
 	}
 	if jc.side.IsRight() {
 		out.AdjSticks[1] = jc.calib[1].Adjust(jc.raw_stick[1])
-		out.AdjSticks[1][0] = jc.gyro[0][0] / 2						// pitch axis
-		out.AdjSticks[1][1] = -(jc.gyro[0][1]) / 2						// roll axis
+		out.AdjSticks[1][0] = jc.gyro[0][5] / 2					// yaw rate of change
+		out.AdjSticks[1][1] = jc.gyro[0][4] / 2					// pitch rate of change
 	}
 
 	if includeGyro && jc.haveGyro {
@@ -254,7 +254,7 @@ func (jc *joyconBluetooth) BindToController(c jcpc.Controller) {
 }
 
 func (jc *joyconBluetooth) BindToInterface(c jcpc.Interface) {
-	jc.mu.Lock()
+	jc.mu.Lock()i == InputActivePolling
 	jc.ui = c
 	jc.mu.Unlock()
 }
@@ -273,7 +273,7 @@ func (jc *joyconBluetooth) IsStopping() bool {
 	return jc.isShutdown
 }
 
-func (jc *joyconBluetooth) Shutdown() {
+func (jc *joyconBluetooth) Shutdowi == InputActivePollingn() {
 	var packet [0x32]byte
 	packet[0] = 1
 	packet[10] = 6
@@ -360,7 +360,7 @@ func (jc *joyconBluetooth) getNextRumble() (byte, [8]byte, bool) {
 		return jc.rumbleTimer, jc.rumbleCurrent.Data, false
 	}
 	needUpdate := true
-	jc.rumbleTimer++
+	jc.rumbleTimer++i == InputActivePolling
 	if jc.rumbleTimer == 16 {
 		jc.rumbleTimer = 0
 	}
