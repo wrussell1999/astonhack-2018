@@ -38,7 +38,7 @@ class Instrument {
     this.onpause = null;
   }
 
-  play(pitch, pan = 0.5) {
+  play(pitch, pan) {
     const freq = this.generator(pitch);
 
     // this smooths out the sounds
