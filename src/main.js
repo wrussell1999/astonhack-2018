@@ -55,7 +55,7 @@ window.onload = function() {
   
   function redraw() {
     ctx.strokeRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.fillStyle = '#363636';
+    ctx.fillStyle = '#102027';
     ctx.strokeStyle = '#f45954';
   }
 
@@ -65,7 +65,7 @@ window.onload = function() {
     redraw();
   }
 
-  ctx.fillStyle = '#363636';
+  ctx.fillStyle = '#102027';
   ctx.strokeStyle = '#f45954';
 
   let length = 0;
@@ -77,9 +77,9 @@ window.onload = function() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.beginPath();
-    ctx.moveTo(0, window.innerHeight/3);
+    ctx.moveTo(0, window.innerHeight/2);
     for (let x = 0; x < canvas.width; x++) {
-      let y = (window.innerHeight/3) + length * Math.sin(x * x * 200 / frequency);
+      let y = (window.innerHeight/2) + length * Math.sin(x * x * 200 / frequency);
       ctx.lineTo(x, y);
     }
     ctx.stroke(); 

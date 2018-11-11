@@ -1,22 +1,47 @@
 html {
     font-family: 'Open Sans', sans-serif;
-    overflow: hidden;
 }
 
 body {
     margin: 0;
-    overflow: hidden;
+    background-color: #081920;
 }
 
-.pad {
-  padding: 10px;
-}
 h1 {
     text-align: center;
-    padding: 10px;
+    color: #ffffff;
 }
-input, label{
-    display: inline-block;
-    vertical-align: middle;
-    margin: 10px 0;
+.joycon {
+    height: 100px; 
+}
+
+label {
+    color: #ffffff;
+    font-family: 'Open Sans Light', sans-serif;
+}
+
+a {
+    font-family: 'Open Sans', sans-serif;
+    right: 50px;
+    width: 120px;
+}
+
+div {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.links {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 5px;
+    left: 10px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.links:hover {
+    opacity: 1.0;
+    transition: 0.3s;
 }
