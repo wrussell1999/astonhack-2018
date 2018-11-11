@@ -63,9 +63,11 @@ function attachJoyconHandlers(sounds) {
         }
       })
     } else if (gp.id.endsWith('-MotionRight')) {
+      let drumSounded = false;
       interval = setInterval(() => {
         if (joyconsEnabled) {
-          if (gp.axes[gp.axes.length - 1] == 1) {
+          if (!drumSounded && gp.axes[gp.axes.length - 1] == 1) {
+            drumSounded = true;
             let pressed = false;
             for (let i = 0; i < gp.buttons.length; i++) {
               if (gp.buttons[i].pressed) {
@@ -79,6 +81,8 @@ function attachJoyconHandlers(sounds) {
             } else {
               sounds.drum();
             }
+          } else if (drumSounded && gp.axes[gp.axes.length - 1] != 1) {
+            drumSounded = false;
           }
         }
       })
