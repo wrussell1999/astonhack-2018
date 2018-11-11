@@ -34,7 +34,7 @@ function attachMouseHandlers(sounds, element) {
   })
 }
 
-function attachJoyconHandlers(instrument) {
+function attachJoyconHandlers(sounds) {
   let interval = null;
 
   window.addEventListener('gamepadconnected', (event) => {
@@ -52,14 +52,20 @@ function attachJoyconHandlers(instrument) {
           if (pressed) {
             let y = (gp.axes[gp.axes.length - 1] + 1) / 2;
             let x = (gp.axes[gp.axes.length - 2] + 1) / 2;
-            instrument.play(y, x);
+            sounds.main.play(y, x);
           } else {
-            instrument.pause();
+            sounds.main.pause();
           }
         }
       })
     } else if (gp.id.endsWith('-MotionRight')) {
-      // drum playing goes here...
+      interval = setInterval(() => {
+        if (joyconsEnabled) {
+          if (gp.axes[gp.axes.length - 1] == 1) {
+            sounds.drum.play();
+          }
+        }
+      })
     }
   })
 
