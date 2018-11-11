@@ -18,6 +18,14 @@ class Instrument {
     this.left.connect(this.leftGain);
     this.left.start()
 
+    this.harmonicVolume = this.ctx.createGain();
+    this.harmonicVolume.gain.setValueAtTime(1.3, this.ctx.currentTime);
+    this.harmonicVolume.connect(this.volume);
+    this.harmonic = this.ctx.createOscillator();
+    this.harmonic.type = 'sine';
+    this.harmonic.connect(this.harmonicVolume);
+    this.harmonic.start();
+
     this.rightGain = this.ctx.createGain();
     this.rightGain.gain.setValueAtTime(0.5, this.ctx.currentTime);
     this.rightGain.connect(this.volume);
@@ -38,11 +46,12 @@ class Instrument {
 
     this.left.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
     this.right.frequency.linearRampToValueAtTime(freq, this.ctx.currentTime + delay);
+    this.harmonic.frequency.linearRampToValueAtTime(freq * 2, this.ctx.currentTime + delay);
 
     this.leftGain.gain.linearRampToValueAtTime(1.0 - pan, this.ctx.currentTime + delay);
     this.rightGain.gain.linearRampToValueAtTime(pan, this.ctx.currentTime + delay);
 
-    this.volume.gain.setValueAtTime(0.14, this.ctx.currentTime + delay);
+    this.volume.gain.setValueAtTime(0.1, this.ctx.currentTime + delay);
 
     if (this.onplay) {
       this.onplay(freq);
