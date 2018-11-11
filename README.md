@@ -18,6 +18,16 @@ The team that worked on this was:
 - [Daniel Spencer](https://github.com/danielfspencer)
 - [Justin Chadwell](https://github.com/jedevc)
 
+## Tools
+
+The project was developed in HTML5 and Go. We used webpack as a build system,
+and heavily utilized the javascript audio and game controller APIs. We also
+used the HTML5 canvas for the visualisations.
+
+We heavily hacked the joycon driver so that we could use the motion controls in
+the browser. The driver for the joycons was originally developed by [Kane
+York](https://github.com/riking) [here](https://github.com/riking/joycon).
+
 ## Development
 
 To install the project:
