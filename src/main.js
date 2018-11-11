@@ -67,12 +67,14 @@ window.onload = function() {
       current_frequency -= 0.08 * (current_frequency - target_frequency);
     }
 
+    let base_amplitude = canvas.height / 3;
+
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.beginPath();
     ctx.lineWidth = 5;
     for (let x = 0; x < canvas.width; x += 2) {
-      let y = (canvas.height/2) + (canvas.height/4) * Math.sin((x + 500) * Math.pow(current_frequency,3) * 0.0000000001);
+      let y = (canvas.height/2.4) + base_amplitude * Math.sin((x + 700) * Math.pow(current_frequency,3) * 0.0000000001);
       ctx.lineTo(x, y);
     }
     ctx.stroke();
