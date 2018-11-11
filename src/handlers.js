@@ -54,9 +54,11 @@ function attachJoyconHandlers(sounds) {
             break;
           }
         }
+        pressed = true;
 
         if (joyconsEnabled) {
           if (pressed) {
+            console.log(y, x);
             let y = (gp.axes[2] + 1) / 2;
             let x = (gp.axes[3] + 1) / 2;
             sounds.main.play(y, x);
