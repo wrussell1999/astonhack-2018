@@ -1,9 +1,11 @@
 html {
     font-family: 'Open Sans', sans-serif;
+    overflow: hidden;
 }
 
 body {
     margin: 0;
+    overflow: hidden;
 }
 
 .pad {

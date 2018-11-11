@@ -9,26 +9,47 @@ window.onload = function() {
   attachHandlers(instrument, document.getElementById('slider'));
 
   let canvas = document.getElementById('slider');
-  let ctx = canvas.getContext('2d');
 
-  ctx.fillStyle = 'black';
-  ctx.strokeStyle = 'white';
+  window.addEventListener('resize', resizeCanvas, false);
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let ctx = canvas.getContext('2d');
+  
+  function redraw() {
+    ctx.strokeRect(0, 0, window.innerWidth, window.innerHeight);
+    ctx.fillStyle = '#363636';
+    ctx.strokeStyle = '#f45954';
+    console.log("Redraw");
+  }
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    console.log("resizeCanvas");
+    redraw();
+  }
+
+  ctx.fillStyle = '#363636';
+  ctx.strokeStyle = '#f45954';
 
   let length = 0;
   let dlength = 4;
 
   let frequency = Infinity;
-
+  
   let interval = setInterval(() => {
-    ctx.fillRect(0, 0, 600, 600);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.beginPath();
-    ctx.moveTo(0, 300);
-    for (let x = 0; x < 600; x++) {
-      let y = 300 + length * Math.sin(x * x * 200 / frequency);
+    ctx.moveTo(0, window.innerHeight/3);
+    console.log("canvas height: " + canvas.height/2);
+    console.log("window height: " + window.innerHeight/2);
+    for (let x = 0; x < canvas.width; x++) {
+      let y = (window.innerHeight/3) + length * Math.sin(x * x * 200 / frequency);
       ctx.lineTo(x, y);
     }
-    ctx.stroke();
+    ctx.stroke(); 
 
     length += dlength;
     if (length >= 100 || length <= -100) {
@@ -44,6 +65,8 @@ window.onload = function() {
     frequency = Infinity;
   }
 }
+
+
 
 function majorPentatonicScale(pitch) {
   const base = 49;
