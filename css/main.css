@@ -1,6 +1,5 @@
 html {
     font-family: 'Open Sans', sans-serif;
-    
 }
 
 body {
@@ -13,14 +12,12 @@ h1 {
     color: #ffffff;
 }
 .joycon {
-    margin: 5px;
     height: 100px; 
 }
 
 label {
     color: #ffffff;
     font-family: 'Open Sans Light', sans-serif;
-    
 }
 
 a {
@@ -33,7 +30,6 @@ div {
     position: absolute;
     top: 5px;
     right: 10px;
-
 }
 
 .links {
