@@ -254,7 +254,7 @@ func (jc *joyconBluetooth) BindToController(c jcpc.Controller) {
 }
 
 func (jc *joyconBluetooth) BindToInterface(c jcpc.Interface) {
-	jc.mu.Lock()i == InputActivePolling
+	jc.mu.Lock()
 	jc.ui = c
 	jc.mu.Unlock()
 }
@@ -273,7 +273,7 @@ func (jc *joyconBluetooth) IsStopping() bool {
 	return jc.isShutdown
 }
 
-func (jc *joyconBluetooth) Shutdowi == InputActivePollingn() {
+func (jc *joyconBluetooth) Shutdown() {
 	var packet [0x32]byte
 	packet[0] = 1
 	packet[10] = 6
@@ -360,7 +360,7 @@ func (jc *joyconBluetooth) getNextRumble() (byte, [8]byte, bool) {
 		return jc.rumbleTimer, jc.rumbleCurrent.Data, false
 	}
 	needUpdate := true
-	jc.rumbleTimer++i == InputActivePolling
+	jc.rumbleTimer++
 	if jc.rumbleTimer == 16 {
 		jc.rumbleTimer = 0
 	}
