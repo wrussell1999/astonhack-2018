@@ -40,7 +40,7 @@ To test the project:
 
 	$ npm run start
 
-The server will then be listening on port 8080.
+The server will then be listening on port 8080. Use chrome. And nothing else.
 
 ## License
 
