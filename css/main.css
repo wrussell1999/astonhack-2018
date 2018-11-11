@@ -35,3 +35,17 @@ div {
     right: 10px;
 
 }
+
+.links {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 5px;
+    left: 10px;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+.links:hover {
+    opacity: 1.0;
+    transition: 0.3s;
+}
