@@ -8,10 +8,12 @@ window.onload = function() {
 
   let instrument = new Instrument(audio, continuous);
   let drum = new Audio('/sounds/bass_drum.wav');
+  let hihat = new Audio('/sounds/hihat.wav');
 
   let sounds = {
     main: instrument,
-    drum: drum
+    drum: drum,
+    hihat: hihat
   }
   handlers.attachMouseHandlers(sounds, document.getElementById('slider'));
   handlers.attachJoyconHandlers(sounds);

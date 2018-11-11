@@ -28,8 +28,12 @@ function attachMouseHandlers(sounds, element) {
   })
 
   document.addEventListener('keypress', (event) => {
-    if (mouseEnabled && event.code == 'Space') {
-      sounds.drum.play();
+    if (mouseEnabled) {
+      if (event.code == 'Space') {
+        sounds.drum.play();
+      } else if (event.code == 'Enter') {
+        sounds.hihat.play();
+      }
     }
   })
 }
