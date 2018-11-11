@@ -47,56 +47,63 @@ window.onload = function() {
 
   let canvas = document.getElementById('slider');
 
+  const fill_colour = '#363636';
+  const stroke_colour = '#f45954';
+
   window.addEventListener('resize', resizeCanvas, false);
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
 
   let ctx = canvas.getContext('2d');
-  
-  function redraw() {
-    ctx.strokeRect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.fillStyle = '#102027';
-    ctx.strokeStyle = '#f45954';
-  }
 
   function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    redraw();
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = fill_colour;
+    ctx.strokeStyle = stroke_colour;
+    ctx.stroke();
   }
 
-  ctx.fillStyle = '#102027';
-  ctx.strokeStyle = '#f45954';
+  const base_frequency = 50;
 
-  let length = 0;
-  let dlength = 4;
+  let target_frequency = base_frequency;
+  let current_frequency = target_frequency;
+  let hysteresis_value = 5;
 
-  let frequency = Infinity;
-  
-  let interval = setInterval(() => {
+  function callback() {
+    draw_frame();
+    window.requestAnimationFrame(callback);
+  }
+
+  function draw_frame() {
+    if (current_frequency < (target_frequency - hysteresis_value)) {
+      current_frequency += 0.08 * (target_frequency - current_frequency);
+    } else if (current_frequency > (target_frequency + hysteresis_value)) {
+      current_frequency -= 0.08 * (current_frequency - target_frequency);
+    }
+
+    let base_amplitude = canvas.height / 3;
+
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     ctx.beginPath();
-    ctx.moveTo(0, window.innerHeight/2);
-    for (let x = 0; x < canvas.width; x++) {
-      let y = (window.innerHeight/2) + length * Math.sin(x * x * 200 / frequency);
+    ctx.lineWidth = 5;
+    for (let x = 0; x < canvas.width; x += 2) {
+      let y = (canvas.height/2.4) + base_amplitude * Math.sin((x + 700) * Math.pow(current_frequency,3) * 0.0000000001);
       ctx.lineTo(x, y);
     }
-    ctx.stroke(); 
-
-    length += dlength;
-    if (length >= 100 || length <= -100) {
-      dlength = -dlength;
-    }
-  }, 2)
+    ctx.stroke();
+  }
 
   instrument.onplay = (freq) => {
-    frequency = freq;
+    target_frequency = freq;
   }
 
   instrument.onpause = (freq) => {
-    frequency = Infinity;
+    target_frequency = base_frequency;
   }
+
+  resizeCanvas();
+  window.requestAnimationFrame(callback);
 }
 
 function majorPentatonicScale(pitch) {

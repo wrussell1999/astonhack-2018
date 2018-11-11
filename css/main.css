@@ -5,6 +5,9 @@ html {
 body {
     margin: 0;
     background-color: #081920;
+
+    height: 100%;
+    overflow: hidden;
 }
 
 h1 {
@@ -41,7 +44,12 @@ div {
     opacity: 0.6;
     transition: 0.3s;
 }
+
 .links:hover {
     opacity: 1.0;
     transition: 0.3s;
+}
+
+#slider {
+    display: block;
 }
