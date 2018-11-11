@@ -44,6 +44,36 @@ function attachJoyconHandlers(sounds) {
   window.addEventListener('gamepadconnected', (event) => {
     let gp = event.gamepad;
     if (gp.id.endsWith('-MotionLeft')) {
+      let drumSounded = false;
+
+      interval = setInterval(() => {
+        let pressed = false;
+        for (let i = 0; i < gp.buttons.length; i++) {
+          if (gp.buttons[i].pressed) {
+            pressed = true;
+            break;
+          }
+        }
+
+        if (joyconsEnabled) {
+          if (pressed) {
+            let y = (gp.axes[2] + 1) / 2;
+            let x = (gp.axes[3] + 1) / 2;
+            sounds.main.play(y, x);
+          } else {
+            sounds.main.pause();
+          }
+
+          /*
+          if (!drumSounded && gp.axes[gp.axes.length - 1] == 1) {
+            drumSounded = true;
+            sounds.drum()
+          }
+          */
+        }
+      })
+    /*
+    if (gp.id.endsWith('-MotionLeft')) {
       interval = setInterval(() => {
         let pressed = false;
         for (let i = 0; i < gp.buttons.length; i++) {
@@ -86,6 +116,7 @@ function attachJoyconHandlers(sounds) {
           }
         }
       })
+      */
     }
   })
 
