@@ -30,9 +30,9 @@ function attachMouseHandlers(sounds, element) {
   document.addEventListener('keypress', (event) => {
     if (mouseEnabled) {
       if (event.code == 'Space') {
-        sounds.drum.play();
+        sounds.drum();
       } else if (event.code == 'Enter') {
-        sounds.hihat.play();
+        sounds.hihat();
       }
     }
   })
@@ -75,9 +75,9 @@ function attachJoyconHandlers(sounds) {
             }
 
             if (pressed) {
-              sounds.hihat.play();
+              sounds.hihat();
             } else {
-              sounds.drum.play();
+              sounds.drum();
             }
           }
         }
