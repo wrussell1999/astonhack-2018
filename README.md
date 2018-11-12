@@ -4,6 +4,12 @@ Notendo Tunes is our attempt at creating a virtual theremin in the browser. Of
 course, that would be too easy, so we've made it controllable using Nintendo
 JoyCons. Cause that sounded like a fun idea at 2pm before we started work.
 
+We think it's pretty cool, and apparently so did everyone else, because we won
+the best hack out of all the other projects! Despite the fact that we decided to 
+test our synthesizers at 3am, probably annoying everyone else.
+
+## Process
+
 As it turns out, getting JoyCons to work in the browser is actually not very
 easy (surprise, surprise). So, we hacked an existing driver to interpret motion
 controls and present them to the Web Gamepad API.
