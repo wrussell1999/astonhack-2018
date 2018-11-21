@@ -4,6 +4,10 @@ Notendo Tunes is our attempt at creating a virtual theremin in the browser. Of
 course, that would be too easy, so we've made it controllable using Nintendo
 JoyCons. Cause that sounded like a fun idea at 2pm before we started work.
 
+[![Demo video][Demo video thumbnail]][Demo video]
+
+> A quick demo video (click to open)
+
 We think it's pretty cool, and apparently so did everyone else, because we won
 the best hack out of all the other projects! Despite the fact that we decided to 
 test our synthesizers at 3am, probably annoying everyone else.
@@ -51,3 +55,6 @@ The server will then be listening on port 8080. Use chrome. And nothing else.
 ## License
 
 All the code written by us is available under the MIT license.
+
+[Demo video]: https://www.youtube.com/watch?v=rGMdvvvoX68
+[Demo video thumbnail]: http://img.youtube.com/vi/rGMdvvvoX68/0.jpg
