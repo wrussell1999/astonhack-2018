@@ -1,8 +1,9 @@
 # Notendo Tunes
 
-Notendo Tunes is our attempt at creating a virtual theremin in the browser. Of
-course, that would be too easy, so we've made it controllable using Nintendo
-JoyCons. Cause that sounded like a fun idea at 2pm before we started work.
+Notendo Tunes is our attempt at creating a virtual theremin in the browser for
+Aston Hack 2018. Of course, that would be too easy, so we've made it
+controllable using Nintendo JoyCons. Cause that sounded like a fun idea at 2pm
+before we actually started working.
 
 [![Demo video][Demo video thumbnail]][Demo video]
 
@@ -42,8 +43,8 @@ York](https://github.com/riking) [here](https://github.com/riking/joycon).
 
 To install the project:
 
-	$ git clone https://github.com/jedevc/hack-aston.git
-	$ cd hack-aston
+	$ git clone https://github.com/jedevc/aston-hack-2018.git
+	$ cd aston-hack-2018
 	$ npm install
 
 To test the project:
