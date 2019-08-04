@@ -41,6 +41,8 @@ York](https://github.com/riking) [here](https://github.com/riking/joycon).
 
 ## Development
 
+### Webpage
+
 To install the project:
 
 	$ git clone https://github.com/jedevc/aston-hack-2018.git
@@ -52,6 +54,15 @@ To test the project:
 	$ npm run start
 
 The server will then be listening on port 8080. Use chrome. And nothing else.
+
+### JoyCon Driver (Linux only)
+
+To start the driver 
+
+```bash
+$ chmod +x jcdriver
+$ sudo ./jcdriver
+```
 
 ## License
 
