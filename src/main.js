@@ -9,18 +9,18 @@ let soundBuffers = {};
 window.onload = function() {
   let instrument = new Instrument(audio, continuous);
 
-  loadSound("static/sounds/bass_drum.wav");
-  loadSound("static/sounds/hihat.wav");
+  loadSound("sounds/bass_drum.wav");
+  loadSound("sounds/hihat.wav");
 
   let drum_play = function() {
     drum_target_frequency = 400;
-    playSound(soundBuffers["static/sounds/bass_drum.wav"]);
+    playSound(soundBuffers["sounds/bass_drum.wav"]);
     window.setTimeout(reset_target, 100);
   }
 
   let hithat_play = function() {
     drum_target_frequency = 400;
-    playSound(soundBuffers["static/sounds/hihat.wav"]);
+    playSound(soundBuffers["sounds/hihat.wav"]);
     window.setTimeout(reset_target, 100);
   }
 
