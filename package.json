@@ -1,5 +1,5 @@
 {
-  "name": "hack-aston",
+  "name": "astonhack-2018",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jedevc/hack-aston.git"
+    "url": "git+https://github.com/wrussell1999/astonhack-2018.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jedevc/hack-aston/issues"
+    "url": "https://github.com/wrussell1999/astonhack-2018/issues"
   },
-  "homepage": "https://github.com/jedevc/hack-aston#readme",
+  "homepage": "https://github.com/wrussell1999/astonhack-2018/README.md",
   "devDependencies": {
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
