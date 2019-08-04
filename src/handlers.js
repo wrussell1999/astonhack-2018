@@ -44,7 +44,7 @@ function attachJoyconHandlers(sounds) {
   let drumSounded = false;
 
   interval = setInterval(() => {
-    let controller =  navigator.getGamepads()[2];
+    let controller =  navigator.getGamepads()[0];
     let enableThero = false;
     let altDrum = false;
 
