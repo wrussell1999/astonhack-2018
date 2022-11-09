@@ -19,8 +19,8 @@
   "devDependencies": {
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^1.0.1",
-    "favicons-webpack-plugin": "0.0.9",
-    "html-webpack-plugin": "^3.2.0",
+    "favicons-webpack-plugin": "6.0.0-alpha.2",
+    "html-webpack-plugin": "^5.5.0",
     "style-loader": "^0.23.1",
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
